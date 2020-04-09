@@ -1,0 +1,103 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Deceptive Article Detection!  Test your headline now!  " />
+    <meta property="og:description" content="Tired of fake news articles? Get to know if your so called news is just a forged article! " />
+    <meta name="description" content="Verify your articles now">
+
+    <title>Test your article now! </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <section class="section">
+    <div class="container">
+      <center>
+        <a href=""><h1 class="title"> Deceptive Article Detection</h1></a>
+      </center>
+
+      <form method="post" id="newsform" enctype="multipart/form-data" action="/">
+        <center>
+        <div class="field has-addons has-addons-centered">
+          <div class="control is-expanded" style="flex-grow: 0.5; ">
+            <label for="headline">Article Headline:</label>
+            <input class="input is-large " type="text" id="hfield" name="headline" placeholder="Paste your headline here" autofocus autocomplete="off"><br><br>
+            <label for="article">Article Body:</label>
+            <!-- <input class="input is-large " type="text" size="50" id="afield" name="article" placeholder="Paste your article here" autofocus> -->
+            <textarea id="afield" name="article" form="newsform" placeholder="Paste your article here" autofocus></textarea>
+          </div>
+          <div class="control" style="padding: 0px 0px 0 10px; ">
+            <input class="button is-large is-primary" type="submit" value="submit">
+            <input type="reset">
+          </div>
+        </div>
+        </center>
+      </form>
+
+      <br/>
+
+      <div class="headb">
+        {% if (messages['result2'] != '' ) %}
+        <h3 id="headline" class="title is-4 is-spaced bd-anchor-title">
+          You entered this article headline:
+        </h3>
+
+        <div class="bd-snippet bd-is-vertical bd-is-1">
+          <h3 class="title is-3">{{  (messages['sentence2']) }}</h3>
+        </div>
+
+        <br>
+        <h3 id="result2" class="title is-4 is-spaced bd-anchor-title">
+          Result:  {{  (messages['result2'])['tag']  }}
+        </h3>
+        <h5>Probability of Headline Deception = {{  ((messages['result2'])['C-deceptive']*100)  }}%</h5>
+        <progress id="myBar" class="progress is-small {{  (messages['result2'])['color']  }}" value="{{  ((messages['result2'])['C-deceptive']*100) }}" style="width:50%" max="100">15%</progress>
+        <br>
+        <h6> Classification based on Ensembled algorithm </h6>
+        <br>
+        <h6> {{ (messages['result2'])['decision'] }} </h6>
+        {% else %}
+        <br>
+        <div class="bd-snippet bd-is-vertical bd-is-1">
+            </div>
+        {% endif %}
+      </div>
+
+    <div class="artb">
+        {% if (messages['result'] != '' ) %}
+            <h3 id="headline" class="title is-4 is-spaced bd-anchor-title">
+              You entered this article body:
+            </h3>
+            <div class="bd-snippet bd-is-vertical bd-is-1">
+                <h3 class="title is-3">{{  (messages['sentence']) }}</h3>
+            </div>
+            <br>
+
+            <h3 id="result" class="title is-4 is-spaced bd-anchor-title">
+              Result:  {{  (messages['result'])['tag']  }}
+
+            </h3><h5>
+            Probability of Article Body Deception = {{  ((messages['result'])['P-deceptive']*100)  }}%</h5>
+            <progress class="progress is-small {{  (messages['result'])['color']  }}" value="{{  ((messages['result'])['P-deceptive']*100) }}" style="width:50%" max="100">15%</progress>
+            <br>
+            <h6> Classification based on Ensembled Algorithm </h6>
+            <br>
+            <h6> {{ (messages['result'])['decision'] }} </h6>
+          {% else %}
+        <br>
+        <div class="bd-snippet bd-is-vertical bd-is-1">
+            </div>
+        {% endif %}
+    </div>
+    </div>
+  </div>
+</section>
+
+</body>
+<footer class="footer">
+</footer>
