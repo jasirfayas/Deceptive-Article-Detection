@@ -70,8 +70,10 @@ Now you should run the **main.py**. To do that run the following command on the 
 ```
 python main.py
 ```
-When this command has run completely, you will be shown a **web address** which is **127.0.0.1:8083**. Type that in your web browser. 
-( Note: You should not close the python terminal until you want to stop the program.)
+When this command has run completely, you will be shown a **web address** which is **127.0.0.1:8083** on the terminal. 
+Type that address in your web browser. 
+
+(Note: You should not close the python terminal until you want to stop the program.)
 
 ## Using the program
 Now your browser will show a webpage which has fields to type in article headlines and body.
