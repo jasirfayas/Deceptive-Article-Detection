@@ -17,8 +17,8 @@ Python3 or Anaconda
 
 Links to install necessary softwares:
 
-*Python 3* - [Click here](https://www.python.org/downloads/)
-*Anaconda* - [Click here](https://www.anaconda.com/distribution/)
+* *Python 3* - [Click here](https://www.python.org/downloads/)
+* *Anaconda* - [Click here](https://www.anaconda.com/distribution/)
 
 ## Running the tests
 
