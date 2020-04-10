@@ -34,6 +34,7 @@ python models.py
 After it has successfully run completely, there will be eight **.pkl** saved in the project folder.
 
 Move those **.pkl** to the **static** folder.
+
 ###Second Step
 
 After you have done the first step, now you are ready to do the next step.
