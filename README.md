@@ -29,7 +29,7 @@ Training data has been used from this [study](http://cse.iitkgp.ac.in/~abhijnan/
 #### Dataset #3
 ["Getting Real about Fake News: Text & metadata from fake & biased news sources around the web"](https://www.kaggle.com/mrisdal/fake-news) by Meg Risdal
 #### Dataset #4
-[Fake or Real News ](https://github.com/GeorgeMcIntire/fake_real_news_dataset) tagged dataset created by Miguel Martinez Alvarez. 
+[Fake or Real News ](https://github.com/GeorgeMcIntire/fake_real_news_dataset) tagged dataset created by Miguel Martinez Alvarez.
 
 ### Download the datasets
  - [fake.csv](https://www.kaggle.com/mrisdal/fake-news)
@@ -37,7 +37,7 @@ Training data has been used from this [study](http://cse.iitkgp.ac.in/~abhijnan/
  - [fr_news.zip](https://github.com/docketrun/Detecting-Fake-News-with-Scikit-Learn/blob/master/fake_or_real_news.csv)
  - [clickbait](https://github.com/bhargaviparanjape/clickbait/blob/master/dataset/clickbait_data.gz)
  - [non_clickbait_data](https://github.com/bhargaviparanjape/clickbait/blob/master/dataset/non_clickbait_data.gz)
- 
+
 
 ### Installing
 
@@ -70,15 +70,15 @@ Now you should run the **main.py**. To do that run the following command on the 
 ```
 python main.py
 ```
-When this command has run completely, you will be shown a **web address** which is **127.0.0.1:8083** on the terminal. 
-Type that address in your web browser. 
+When this command has run completely, you will be shown a **web address** which is **127.0.0.1:8083** on the terminal.
+Type that address in your web browser.
 
 (Note: You should not close the python terminal until you want to stop the program.)
 
 ## Using the program
 Now your browser will show a webpage which has fields to type in article headlines and body.
 
-Type in the suspecting articles into the text fields and press **Submit**. 
+Type in the suspecting articles into the text fields and press **Submit**.
 
 **Results** will be shown below in the webpage.
 
@@ -97,8 +97,7 @@ Type in the suspecting articles into the text fields and press **Submit**.
 ## Contributers
 
  - Aleena Thankachen
- - Jasir Fayas
- - Jeena Varghese
+ - [Jasir Fayas P B](https://www.linkedin.com/in/jasirfayas/) - Jeena Varghese
  - Joe Jose
 
 ## Acknowledgments
