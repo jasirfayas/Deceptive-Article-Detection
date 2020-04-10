@@ -35,7 +35,7 @@ After it has successfully run completely, there will be eight **.pkl** saved in 
 
 Move those **.pkl** to the **static** folder.
 
-###Second Step
+### Second Step
 
 After you have done the first step, now you are ready to do the next step.
 Now you should run the **main.py**. To do that run the following command on the terminal:
@@ -45,7 +45,7 @@ python main.py
 When this command has run completely, you will be shown a **web address** which is **127.0.0.1:8083**. Type that in your web browser. 
 ( Note: You should not close the python terminal until you want to stop the program.)
 
-##Using the program
+## Using the program
 Now your browser will show a webpage which has fields to type in article headlines and body.
 
 Type in the suspecting articles into the text fields and press **Submit**. 
