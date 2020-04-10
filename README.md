@@ -70,13 +70,6 @@ Type in the suspecting articles into the text fields and press **Submit**.
  - JEENA VARGHESE
  - JOE JOSE
 
-## Authors
-
-* **Jasir Fayas P B**
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-
 ## Acknowledgments
 
 * kaggle.com
