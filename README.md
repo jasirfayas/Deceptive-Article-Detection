@@ -1,3 +1,4 @@
+
 # Deceptive Article Detection
 
 This is a Machine Learning based project to predict whether an article is potentially deceptive or not.
@@ -5,6 +6,7 @@ This is a Machine Learning based project to predict whether an article is potent
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
 ### Prerequisites
 
 You need to install the following tools in your machine:
@@ -12,6 +14,30 @@ You need to install the following tools in your machine:
 ```
 Python3 or Anaconda
 ```
+### Datasets
+The datasets used for this project are from various sources. Below is some description about the data files used for this project.
+#### Dataset #1
+LIAR dataset which contains 3 files with .tsv format for test, train and validation.
+
+LIAR: A BENCHMARK DATASET FOR FAKE NEWS DETECTION
+
+William Yang Wang, ["Liar, Liar Pants on Fire": A New Benchmark Dataset for Fake News Detection](https://arxiv.org/abs/1705.00648), to appear in Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (ACL 2017), short paper, Vancouver, BC, Canada, July 30-August 4, ACL.
+
+#### Dataset #2
+Training data has been used from this [study](http://cse.iitkgp.ac.in/~abhijnan/papers/chakraborty_clickbait_asonam16.pdf) - data posted [here](https://github.com/bhargaviparanjape/clickbait/tree/master/dataset)
+
+#### Dataset #3
+["Getting Real about Fake News: Text & metadata from fake & biased news sources around the web"](https://www.kaggle.com/mrisdal/fake-news) by Meg Risdal
+#### Dataset #4
+[Fake or Real News ](https://github.com/GeorgeMcIntire/fake_real_news_dataset) tagged dataset created by Miguel Martinez Alvarez. 
+
+### Download the datasets
+ - [fake.csv](https://www.kaggle.com/mrisdal/fake-news)
+ - [liar_dataset.zip](https://www.cs.ucsb.edu/~william/data/liar_dataset.zip)
+ - [fr_news.zip](https://github.com/docketrun/Detecting-Fake-News-with-Scikit-Learn/blob/master/fake_or_real_news.csv)
+ - [clickbait](https://github.com/bhargaviparanjape/clickbait/blob/master/dataset/clickbait_data.gz)
+ - [non_clickbait_data](https://github.com/bhargaviparanjape/clickbait/blob/master/dataset/non_clickbait_data.gz)
+ 
 
 ### Installing
 
