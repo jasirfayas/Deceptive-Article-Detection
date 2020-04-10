@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 from sklearn.utils import shuffle
-head_ds = pd.read_csv('dataset/clickbaitdata.csv')
+head_ds = pd.read_csv('dataset/clickBait_Data.csv')
 head_ds = head_ds.drop(['index','id'], axis = 1)
                      
 fake_raw = pd.read_csv('dataset/fake.csv')
@@ -29,7 +29,7 @@ head_ds2 = shuffle(head_ds2, random_state=27).reset_index(drop=True)
 head_combined = pd.concat([head_ds,head_ds2,fake_ds_head],sort=False)
 head_combined = shuffle(head_combined, random_state=27).reset_index(drop=True)
 
-body_ds = pd.read_csv('dataset/fr_news.csv')
+body_ds = pd.read_csv('dataset/fake_or_real_news.csv')
 body_ds.drop(body_ds.columns[body_ds.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
 body_ds = body_ds.drop(['title'], axis = 1)
 body_ds.columns = ['article', 'label']
