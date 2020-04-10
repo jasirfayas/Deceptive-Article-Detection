@@ -97,7 +97,8 @@ Type in the suspecting articles into the text fields and press **Submit**.
 ## Contributers
 
  - Aleena Thankachen
- - [Jasir Fayas P B](https://www.linkedin.com/in/jasirfayas/) - Jeena Varghese
+ - [Jasir Fayas P B](https://www.linkedin.com/in/jasirfayas/)
+ - Jeena Varghese
  - Joe Jose
 
 ## Acknowledgments
