@@ -61,7 +61,7 @@ After it has successfully run completely, there will be eight **.pkl** saved in 
 
 Move those **.pkl** to the **static** folder.
 
-(Note: You may have to install python modules such as numpy,sklearn,etc. seperately using pip)
+(Note: You may have to install python modules such as numpy,pandas,sklearn etc. seperately using pip)
 
 ### Second Step
 
