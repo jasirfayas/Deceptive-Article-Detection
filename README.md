@@ -92,10 +92,10 @@ Type in the suspecting articles into the text fields and press **Submit**.
 
 ## Contributers
 
- - ALEENA THANKACHEN
- - JASIR FAYAS
- - JEENA VARGHESE
- - JOE JOSE
+ - Aleena Thankachen
+ - Jasir Fayas
+ - Jeena Varghese
+ - Joe Jose
 
 ## Acknowledgments
 
