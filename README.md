@@ -31,13 +31,22 @@ Training data has been used from this [study](http://cse.iitkgp.ac.in/~abhijnan/
 #### Dataset #4
 [Fake or Real News ](https://github.com/GeorgeMcIntire/fake_real_news_dataset) tagged dataset created by Miguel Martinez Alvarez.
 
+#### Dataset #5
+In this dataset, the data are from multiple sources as:
+
+From Click Bait challenge
+Collected from some of the already existing repo, basically scraped from News websites like clickbait ones from Buzzfeed, ClickHole, Doses, and non-ClickBait from Ne York Times.. etc.
+
+Using these Data it is compiled to one Main CSV File which contains all Data with clickBait labeled as 1.
+These data are compiled by Amardeep Kumar(AD) and Utsav Shukla @us241098 and is available at [AOSSIE: toxic ](https://www.kaggle.com/ad6398/aossie-click-bait-dataset)
+
 ### Download the datasets
  - [fake.csv](https://www.kaggle.com/mrisdal/fake-news)
  - [liar_dataset.zip](https://www.cs.ucsb.edu/~william/data/liar_dataset.zip)
- - [fr_news.zip](https://github.com/docketrun/Detecting-Fake-News-with-Scikit-Learn/blob/master/fake_or_real_news.csv)
- - [clickbait](https://github.com/bhargaviparanjape/clickbait/blob/master/dataset/clickbait_data.gz)
+ - [fake_or_real_news.zip](https://github.com/docketrun/Detecting-Fake-News-with-Scikit-Learn/blob/master/fake_or_real_news.csv)
+ - [clickbait_data](https://github.com/bhargaviparanjape/clickbait/blob/master/dataset/clickbait_data.gz)
  - [non_clickbait_data](https://github.com/bhargaviparanjape/clickbait/blob/master/dataset/non_clickbait_data.gz)
-
+- [clickBait_Data](https://www.kaggle.com/ad6398/aossie-click-bait-dataset/download)
 
 ### Installing
 
@@ -57,9 +66,9 @@ To do that run the following command on your **python terminal** or in **Jupyter
 ```
 python models.py
 ```
-After it has successfully run completely, there will be eight **.pkl** saved in the project folder.
+After it has successfully run completely, you can find that there will be eight **.pkl** files saved in the project folder.
 
-Move those **.pkl** to the **static** folder.
+Move those **.pkl** files to the **static** folder.
 
 (Note: You may have to install python modules such as numpy,pandas,sklearn etc. seperately using pip)
 
