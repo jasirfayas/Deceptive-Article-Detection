@@ -6,11 +6,6 @@ from warnings import simplefilter
 # ignore all future warnings
 simplefilter(action='ignore', category=FutureWarning)
 
-# import warnings filter
-from warnings import simplefilter
-# ignore all future warnings
-simplefilter(action='ignore', category=FutureWarning)
-
 from sklearn.utils import shuffle
 head_ds = pd.read_csv('dataset/clickBait_Data.csv')
 head_ds = head_ds.drop(['index','id'], axis = 1)
