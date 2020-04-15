@@ -1,6 +1,16 @@
 import pandas as pd
 import numpy as np
 
+# import warnings filter
+from warnings import simplefilter
+# ignore all future warnings
+simplefilter(action='ignore', category=FutureWarning)
+
+# import warnings filter
+from warnings import simplefilter
+# ignore all future warnings
+simplefilter(action='ignore', category=FutureWarning)
+
 from sklearn.utils import shuffle
 head_ds = pd.read_csv('dataset/clickBait_Data.csv')
 head_ds = head_ds.drop(['index','id'], axis = 1)
@@ -50,6 +60,7 @@ body_combined = shuffle(body_combined, random_state=27).reset_index(drop=True)
 
 body_combined.label = body_combined.label.replace({True: "REAL",False: "FAKE"})
 body_combined.label = body_combined.label.replace({"REAL": 0, "FAKE": 1})
+print("\n--> Dataset loading and combining finished.")
 
 # head_all.describe()
 
@@ -66,10 +77,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 X2 = head_combined.titles
 y2 = head_combined.clickbait
 X_train2, X_test2, y_train2, y_test2 = train_test_split(X2, y2, test_size=0.25)
-
+print("\n--> Test-Train Splitting finished.")
 
 #pipeline1 NaiveBayes
-print("\n||||||||-------------NaiveBayes------------|||||||||")
+print("\n|||||||||-------------NaiveBayes------------|||||||||\n")
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
@@ -82,6 +93,7 @@ print (np.mean(predicted1 == y_test))
 from sklearn.metrics import classification_report, confusion_matrix
 print (classification_report(y_test, predicted1))
 confusion_matrix(y_test, predicted1)
+print("\n--> Body pipeline created.\n")
 
 #pipeline5 NaiveBayes
 pipe_head_nb = Pipeline([('vect', CountVectorizer()),
@@ -92,10 +104,10 @@ predicted5 = pipe_head_nb.predict(X_test2)
 print (np.mean(predicted5 == y_test2))
 print (classification_report(y_test2, predicted5))
 confusion_matrix(y_test2, predicted5)
-
+print("\n--> Headline pipeline created.")
 
 #pipeline2 KNN
-print("\n\n|||||||||----------------KNN---------------||||||||||")
+print("\n\n|||||||||----------------KNN---------------||||||||||\n")
 from sklearn.neighbors import KNeighborsClassifier
 # from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 # from sklearn import svm
@@ -107,6 +119,7 @@ predicted2 = pipe_body_knn.predict(X_test)
 print (np.mean(predicted2 == y_test))
 print (classification_report(y_test, predicted2))
 confusion_matrix(y_test, predicted2)
+print("\n--> Body pipeline created.\n")
 
 pipe_head_knn= Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
@@ -116,9 +129,10 @@ predicted6 = pipe_head_knn.predict(X_test2)
 print (np.mean(predicted6 == y_test2))
 print (classification_report(y_test2, predicted6))
 confusion_matrix(y_test2, predicted6)
+print("\n--> Headline pipeline created.")
 
 #pipeline3 RandomForest
-print("\n\n||||||||||--------RandomForest---------||||||||||||")
+print("\n\n||||||||||--------RandomForest---------||||||||||||\n")
 from sklearn.ensemble import RandomForestClassifier
 pipe_body_rf = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
@@ -128,6 +142,7 @@ predicted3 = pipe_body_rf.predict(X_test)
 print (np.mean(predicted3 == y_test))
 print (classification_report(y_test, predicted3))
 confusion_matrix(y_test, predicted3)
+print("\n--> Body pipeline created.\n")
 
 pipe_head_rf = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
@@ -137,9 +152,10 @@ predicted7 = pipe_head_rf.predict(X_test2)
 print (np.mean(predicted7 == y_test2))
 print (classification_report(y_test2, predicted7))
 confusion_matrix(y_test2, predicted7)
+print("\n--> Headline pipeline created.")
 
-#pipeline Logistic Regression
-print("\n\n||||||||--------LogisticRegression--------|||||||||")
+#pipeline4 Logistic Regression
+print("\n\n||||||||--------LogisticRegression--------|||||||||\n")
 from sklearn.linear_model import  LogisticRegression
 pipe_body_lgr = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
@@ -149,6 +165,7 @@ predicted4 = pipe_body_lgr.predict(X_test)
 print (np.mean(predicted4 == y_test))
 print (classification_report(y_test, predicted4))
 confusion_matrix(y_test, predicted4)
+print("\n--> Body pipeline created.\n")
 
 pipe_head_lgr = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
@@ -158,10 +175,11 @@ predicted8 = pipe_head_lgr.predict(X_test2)
 print (np.mean(predicted8 == y_test2))
 print (classification_report(y_test2, predicted8))
 confusion_matrix(y_test2, predicted8)
+print("\n--> Headline pipeline created.")
 
 #Serialising objects using joblib
 import joblib
-print("\n\n||||DUMPING PIPELINES AS EXTERNAL FILES............|||")
+print("\n\n--> SAVING PIPELINES AS EXTERNAL FILES...")
 
 joblib.dump(pipe_body_nb, 'body_nb.pkl') 
 joblib.dump(pipe_body_knn, 'body_knn.pkl') 
@@ -173,4 +191,4 @@ joblib.dump(pipe_head_knn, 'head_knn.pkl')
 joblib.dump(pipe_head_rf, 'head_rf.pkl')  
 joblib.dump(pipe_head_lgr, 'head_lgr.pkl')  
 
-print("\n\nclassifier training is completed successfully............")
+print("\n\nClassifier training is completed successfully...!!!")
