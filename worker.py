@@ -84,7 +84,6 @@ def calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr
     else:
             return 0.5       
 
-        
 def body_result(msg_op,mean,mean0):
     if ((mean*100 >= 40) & ((mean*100 <= 60))):
         tag = 'Not sure'
@@ -115,8 +114,6 @@ def body_scoring(article):
     mean0=((pred_score_nb[0]+pred_score_knn[0]+pred_score_rf[0]+pred_score_lgr[0])/4)
 
     return body_result(decision,mean,mean0)
-
-
 
 def headline_result(msg_op,mean,mean0):
     if ((mean*100 >= 40) & ((mean*100 <= 60))):
