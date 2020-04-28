@@ -114,4 +114,4 @@ Type in the suspecting articles into the text fields and press **Submit**.
 
 * [kaggle](https://www.kaggle.com/)
 * [towardsdatascience](https://www.towardsdatascience.com/)
-* [fakenewschallenge](https://www.fakenewschallenge.org/)
+* [fakenewschallenge](http://www.fakenewschallenge.org/)
