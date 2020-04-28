@@ -1,4 +1,12 @@
 <!doctype html>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">Home</a>      
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <span class="nav" onclick="openNav()">Sidebar</span>
+    <div id="main">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,17 +16,27 @@
     <meta name="description" content="Verify your articles now">
 
     <title>Test your article now! </title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type=text/css href="C:\Users\JACHU\Desktop\dad_v1.3\static\style.css">
 </head>
+<script>
+/* Set the width of the side navigation to 250px */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "200px";
+}
 
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
 <body>
 
   <section class="section">
     <div class="container">
+      <div class="home"> 
       <center>
-        <a href=""><h1 class="title"> Deceptive Article Detection</h1></a>
+        <h1 class="title"><u> Deceptive Article Detection</u></h1>
       </center>
 
       <form method="post" id="newsform" enctype="multipart/form-data" action="/">
@@ -26,33 +44,32 @@
         <div class="field has-addons has-addons-centered">
           <div class="control is-expanded" style="flex-grow: 0.5; ">
             <label for="headline">Article Headline:</label>
-            <input class="input is-large " type="text" id="hfield" name="headline" placeholder="Paste your headline here" autofocus autocomplete="off"><br><br>
+            <input class="input is-large " type="text" id="hfield" name="headline" placeholder="Paste your headline here..." autofocus autocomplete="off"><br><br>
             <label for="body">Article Body:</label>
-            <!-- <input class="input is-large " type="text" size="50" id="afield" name="article" placeholder="Paste your article here" autofocus> -->
-            <textarea id="afield" name="body" form="newsform" placeholder="Paste your article content here" autofocus></textarea>
+            <textarea class="input" id="afield" name="body" form="newsform" placeholder="Paste your article content here..." autofocus></textarea>
           </div>
           <div class="control" style="padding: 0px 0px 0 10px; ">
-            <input class="button is-large is-primary" type="submit" value="submit">
+            <input class="button" type="submit" value="Submit">
             <input type="reset">
           </div>
         </div>
         </center>
       </form>
-
+    </div>
       <br/>
 
       <div class="headb">
         {% if (messages['result2'] != '' ) %}
-        <h3 id="headline" class="title is-4 is-spaced bd-anchor-title">
+        <h3 id="headline" class="head">
           You entered this article headline:
         </h3>
 
-        <div class="bd-snippet bd-is-vertical bd-is-1">
-          <h3 class="title is-3">{{  (messages['sentence2']) }}</h3>
+        <div class="sentence">
+          <h3 class="msg">{{  (messages['sentence2']) }}</h3>
         </div>
 
         <br>
-        <h3 id="result2" class="title is-4 is-spaced bd-anchor-title">
+        <h3 id="result2" class="res">
           Result:  {{  (messages['result2'])['tag']  }}
         </h3>
         <h5>Probability of Headline Deception = {{  ((messages['result2'])['H-deceptive']*100)  }}%</h5>
@@ -63,22 +80,20 @@
         <h6> {{ (messages['result2'])['decision'] }} </h6>
         {% else %}
         <br>
-        <div class="bd-snippet bd-is-vertical bd-is-1">
-            </div>
         {% endif %}
       </div>
-
+      <br/>
     <div class="artb">
         {% if (messages['result'] != '' ) %}
-            <h3 id="body" class="title is-4 is-spaced bd-anchor-title">
+            <h3 id="body" class="body">
               You entered this article body:
             </h3>
-            <div class="bd-snippet bd-is-vertical bd-is-1">
-                <h3 class="title is-3">{{  (messages['sentence']) }}</h3>
+            <div class="sentence">
+                <h3 class="is-3">{{  (messages['sentence']) }}</h3>
             </div>
             <br>
 
-            <h3 id="result" class="title is-4 is-spaced bd-anchor-title">
+            <h3 id="result" class="res">
               Result:  {{  (messages['result'])['tag']  }}
 
             </h3><h5>
@@ -90,14 +105,35 @@
             <h6> {{ (messages['result'])['decision'] }} </h6>
           {% else %}
         <br>
-        <div class="bd-snippet bd-is-vertical bd-is-1">
-            </div>
         {% endif %}
     </div>
+          <br/>
+    <div class="about" id="about">
+      <h3>About</h3>
+      <p>
+              Deceptive articles have been there since the advent of the internet. 
+              The increasing popularity of social media has also increased the number of fake articles. Fake news can be definedas fictitious articles deliberately fabricated to deceive readers.   
+              Social media and all type ofnews outlet publish deceptive articles to increase their readership.</p>
+              <p>
+              The main goal of deceptive article websites is to affect public opinion on certain matters. 
+              Deceptive article detection is an important yet challenging problem that is not yet understood well.</p>
+              <p>Fake articles have mainly three characteristics, they are the text of an article, the user response it receives and the source users promoting it.
+              There are many methods to detect fake articles.  
+              The hybrid ensembled classification model is built to increase the accuracy of detecting fake news.</p>
+              <p>The algorithms used in the hybrid classification model are Naive Bayes, Random forest, K nearest neighbor,Support Vector Machine, and Logistic regression.
+              All these algorithms use training data as a bag of words model which was created using count vectorizer and term frequency-inverse document frequency transformer.
+              Python is used as a language to verify and validate the result.
+              Implementation is carried out using default algorithm values.
+              The main aim is to find a reliable and accurate model that classifies a given article as either fake or real.</p>
+            </p>
+    </div>
+          <br/>
+    <div id="contact">
+      <a style="font-size:30px; font-weight:300" href="https://github.com/jasirfayas/Deceptive-Article-Detection" target="_blank">Check out our GitHub Repository</a>
+    </div>    
     </div>
   </div>
 </section>
 
 </body>
-<footer class="footer">
-</footer>
+</div>
