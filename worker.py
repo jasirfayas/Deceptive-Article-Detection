@@ -83,8 +83,8 @@ def calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr
             return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/4)
     else:
             return 0.5       
-
-def body_result(msg_op,mean,mean0):
+        
+def body_result(msg_op,mean):
     if ((mean*100 >= 40) & ((mean*100 <= 60))):
         tag = 'Not sure'
         color = 'is-warning'
@@ -94,7 +94,7 @@ def body_result(msg_op,mean,mean0):
     else:
         tag = 'This article body is true/not-deceptive'
         color = 'is-primary'
-    prob = {'B-deceptive': round(mean,3), 'B-notDeceptive': round(mean0,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
+    prob = {'B-deceptive': round(mean,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
     return prob
 
 def body_scoring(article):
@@ -111,11 +111,10 @@ def body_scoring(article):
 
     decision=hybrid(pred_cent_nb,pred_cent_knn,pred_cent_rf,pred_cent_lgr)
     mean = calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr)
-    mean0=((pred_score_nb[0]+pred_score_knn[0]+pred_score_rf[0]+pred_score_lgr[0])/4)
 
-    return body_result(decision,mean,mean0)
+    return body_result(decision,mean)
 
-def headline_result(msg_op,mean,mean0):
+def headline_result(msg_op,mean):
     if ((mean*100 >= 40) & ((mean*100 <= 60))):
         tag = 'Not sure'
         color = 'is-warning'
@@ -125,7 +124,7 @@ def headline_result(msg_op,mean,mean0):
     else:
         tag = 'This headline is true/not-deceptive'
         color = 'is-primary'
-    prob = {'H-deceptive': round(mean,3), 'H-notDeceptive': round(mean0,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
+    prob = {'H-deceptive': round(mean,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
     return prob
 
 def headline_scoring(headline):
@@ -142,9 +141,8 @@ def headline_scoring(headline):
 
     decision=hybrid(pred_cent_nb,pred_cent_knn,pred_cent_rf,pred_cent_lgr)
     mean = calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr)
-    mean0=((pred_score_nb[0]+pred_score_knn[0]+pred_score_rf[0]+pred_score_lgr[0])/4)
 
-    return headline_result(decision,mean,mean0)
+    return headline_result(decision,mean)
 
 if __name__ == "__main__":
     result = scoring('')
