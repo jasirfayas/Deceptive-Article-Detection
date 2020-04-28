@@ -57,120 +57,99 @@ def hybrid(predcent1,predcent2,predcent3,predcent4):
     else:
         msg_op = 3    
     return msg_op    
+
+def calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr):
+    if(decision == 1):
+        if((pred_score_nb[1]*100)>=40):
+            return ((pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
+        elif((pred_score_knn[1]*100)>=40):
+            return ((pred_score_nb[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
+        elif((pred_score_rf[1]*100)>=40):
+            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_lgr[1])/3)
+        elif((pred_score_lgr[1]*100)>=40):
+            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1])/3)        
+        else:
+            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/4)
+    elif(decision == 2):
+        if((pred_score_nb[1]*100)<=60):
+            return ((pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
+        elif((pred_score_knn[1]*100)<=60):
+            return ((pred_score_nb[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
+        elif((pred_score_rf[1]*100)<=60):
+            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_lgr[1])/3)
+        elif((pred_score_lgr[1]*100)<=60):
+            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1])/3)        
+        else:
+            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/4)
+    else:
+            return 0.5       
+
         
-def model(mean_article0,msg_op,mean_article):
-    if ((mean_article*100 >= 40) & ((mean_article*100 <= 60))):
+def body_result(msg_op,mean,mean0):
+    if ((mean*100 >= 40) & ((mean*100 <= 60))):
         tag = 'Not sure'
         color = 'is-warning'
-    elif (mean_article*100 > 60):
+    elif (mean*100 > 60):
         tag = 'This article body is fake/deceptive'
         color = 'is-danger'
     else:
         tag = 'This article body is true/not-deceptive'
         color = 'is-primary'
-    prob = {'P-deceptive': round(mean_article,3), 'P-notDeceptive': round(mean_article0,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
+    prob = {'B-deceptive': round(mean,3), 'B-notDeceptive': round(mean0,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
     return prob
 
-def scoring(article):
+def body_scoring(article):
 
-    pred_score1 = model_1.predict_proba([article])[0]
-    pred_score2 = model_2.predict_proba([article])[0]
-    pred_score3 = model_3.predict_proba([article])[0]
-    pred_score4 = model_4.predict_proba([article])[0]   
+    pred_score_nb = model_1.predict_proba([article])[0]
+    pred_score_knn = model_2.predict_proba([article])[0]
+    pred_score_rf = model_3.predict_proba([article])[0]
+    pred_score_lgr = model_4.predict_proba([article])[0]   
 
-    pred_cent1 = pred_score1[1]*100
-    pred_cent2 = pred_score2[1]*100
-    pred_cent3 = pred_score3[1]*100
-    pred_cent4 = pred_score4[1]*100
+    pred_cent_nb = pred_score_nb[1]*100
+    pred_cent_knn = pred_score_knn[1]*100
+    pred_cent_rf = pred_score_rf[1]*100
+    pred_cent_lgr = pred_score_lgr[1]*100
 
-    decision=hybrid(pred_cent1,pred_cent2,pred_cent3,pred_cent4)
+    decision=hybrid(pred_cent_nb,pred_cent_knn,pred_cent_rf,pred_cent_lgr)
+    mean = calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr)
+    mean0=((pred_score_nb[0]+pred_score_knn[0]+pred_score_rf[0]+pred_score_lgr[0])/4)
 
-    if(decision == 1):
-        if(pred_cent1>=40):
-            mean_article=((pred_score2[1]+pred_score3[1]+pred_score4[1])/3)
-        elif(pred_cent2>=40):
-            mean_article=((pred_score1[1]+pred_score3[1]+pred_score4[1])/3)
-        elif(pred_cent3>=40):
-            mean_article=((pred_score1[1]+pred_score2[1]+pred_score4[1])/3)
-        elif(pred_cent4>=40):
-            mean_article=((pred_score1[1]+pred_score2[1]+pred_score3[1])/3)        
-        else:
-            mean_article=((pred_score1[1]+pred_score2[1]+pred_score3[1]+pred_score4[1])/4)
-    elif(decision == 2):
-        if(pred_cent1<=60):
-            mean_article=((pred_score2[1]+pred_score3[1]+pred_score4[1])/3)
-        elif(pred_cent2<=60):
-            mean_article=((pred_score1[1]+pred_score3[1]+pred_score4[1])/3)
-        elif(pred_cent3<=60):
-            mean_article=((pred_score1[1]+pred_score2[1]+pred_score4[1])/3)
-        elif(pred_cent4<=60):
-            mean_article=((pred_score1[1]+pred_score2[1]+pred_score3[1])/3)        
-        else:
-            mean_article=((pred_score1[1]+pred_score2[1]+pred_score3[1]+pred_score4[1])/4)
-    else:
-            mean_article=0.5       
+    return body_result(decision,mean,mean0)
 
-    mean_article0=((pred_score1[0]+pred_score2[0]+pred_score3[0]+pred_score4[0])/4)
 
-    return model(mean_article0,decision,mean_article)
 
-def model2(mean_head0,msg_op,mean_head):
-    if ((mean_head*100 >= 40) & ((mean_head*100 <= 60))):
+def headline_result(msg_op,mean,mean0):
+    if ((mean*100 >= 40) & ((mean*100 <= 60))):
         tag = 'Not sure'
         color = 'is-warning'
-    elif (mean_head*100 > 60):
+    elif (mean*100 > 60):
         tag = 'This headline is fake/deceptive'
         color = 'is-danger'
     else:
         tag = 'This headline is true/not-deceptive'
         color = 'is-primary'
-    prob = {'C-deceptive': round(mean_head,3), 'C-notDeceptive': round(mean_head0,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
+    prob = {'H-deceptive': round(mean,3), 'H-notDeceptive': round(mean0,3), 'tag': tag, 'color':color, 'decision': message[msg_op] }
     return prob
 
-def scoring2(headline):
+def headline_scoring(headline):
 
-    pred_score5 = model_5.predict_proba([headline])[0]
-    pred_score6 = model_6.predict_proba([headline])[0]
-    pred_score7 = model_7.predict_proba([headline])[0]
-    pred_score8 = model_8.predict_proba([headline])[0]  
+    pred_score_nb = model_5.predict_proba([headline])[0]
+    pred_score_knn = model_6.predict_proba([headline])[0]
+    pred_score_rf = model_7.predict_proba([headline])[0]
+    pred_score_lgr = model_8.predict_proba([headline])[0]  
 
-    pred_cent5 = pred_score5[1]*100
-    pred_cent6 = pred_score6[1]*100
-    pred_cent7 = pred_score7[1]*100
-    pred_cent8 = pred_score8[1]*100
+    pred_cent_nb = pred_score_nb[1]*100
+    pred_cent_knn = pred_score_knn[1]*100
+    pred_cent_rf = pred_score_rf[1]*100
+    pred_cent_lgr = pred_score_lgr[1]*100
 
-    decision2=hybrid(pred_cent5,pred_cent6,pred_cent7,pred_cent8)
+    decision=hybrid(pred_cent_nb,pred_cent_knn,pred_cent_rf,pred_cent_lgr)
+    mean = calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr)
+    mean0=((pred_score_nb[0]+pred_score_knn[0]+pred_score_rf[0]+pred_score_lgr[0])/4)
 
-    if(decision2 == 1):
-        if(pred_cent5>=40):
-            mean_head=((pred_score6[1]+pred_score7[1]+pred_score8[1])/3)
-        elif(pred_cent6>=40):
-            mean_head=((pred_score5[1]+pred_score7[1]+pred_score8[1])/3)
-        elif(pred_cent7>=40):
-            mean_head=((pred_score5[1]+pred_score6[1]+pred_score8[1])/3)
-        elif(pred_cent8>=40):
-            mean_head=((pred_score5[1]+pred_score6[1]+pred_score7[1])/3)        
-        else:
-            mean_head=((pred_score5[1]+pred_score6[1]+pred_score7[1]+pred_score8[1])/4)
-    elif(decision2 == 2):
-        if(pred_cent5<=60):
-            mean_head=((pred_score6[1]+pred_score7[1]+pred_score8[1])/3)
-        elif(pred_cent6<=60):
-            mean_head=((pred_score5[1]+pred_score7[1]+pred_score8[1])/3)
-        elif(pred_cent7<=60):
-            mean_head=((pred_score5[1]+pred_score6[1]+pred_score8[1])/3)
-        elif(pred_cent8<=60):
-            mean_head=((pred_score5[1]+pred_score6[1]+pred_score7[1])/3)        
-        else:
-            mean_head=((pred_score5[1]+pred_score6[1]+pred_score7[1]+pred_score8[1])/4)
-    else:
-            mean_head=0.5   
-
-    mean_head0=((pred_score5[0]+pred_score6[0]+pred_score7[0]+pred_score8[0])/4)
-
-    return model2(mean_head0,decision2,mean_head)
+    return headline_result(decision,mean,mean0)
 
 if __name__ == "__main__":
-    result = scoring('6 Possible Hurdles For The GOP Tax Plan')
-    result2 = scoring('6 Possible Hurdles For The GOP Tax Plan')
+    result = scoring('')
+    result2 = scoring('')
     print(result,result2)
