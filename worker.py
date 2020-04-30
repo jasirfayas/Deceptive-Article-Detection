@@ -3,15 +3,15 @@ import os
 
 script_dir = os.path.dirname(__file__)
 
-body_model_path1 = os.path.join(script_dir,r'static',r'body_nb.pkl')
-body_model_path2 = os.path.join(script_dir,r'static',r'body_knn.pkl')
-body_model_path3 = os.path.join(script_dir,r'static',r'body_rf.pkl')
-body_model_path4 = os.path.join(script_dir,r'static',r'body_lgr.pkl')
+body_model_path1 = os.path.join(script_dir, r'static', r'body_nb.pkl')
+body_model_path2 = os.path.join(script_dir, r'static', r'body_knn.pkl')
+body_model_path3 = os.path.join(script_dir, r'static', r'body_rf.pkl')
+body_model_path4 = os.path.join(script_dir, r'static', r'body_lgr.pkl')
 
-headline_model_path1 = os.path.join(script_dir,r'static',r'head_nb.pkl')
-headline_model_path2 = os.path.join(script_dir,r'static',r'head_knn.pkl')
-headline_model_path3 = os.path.join(script_dir,r'static',r'head_rf.pkl')
-headline_model_path4 = os.path.join(script_dir,r'static',r'head_lgr.pkl')
+headline_model_path1 = os.path.join(script_dir, r'static', r'head_nb.pkl')
+headline_model_path2 = os.path.join(script_dir, r'static', r'head_knn.pkl')
+headline_model_path3 = os.path.join(script_dir, r'static', r'head_rf.pkl')
+headline_model_path4 = os.path.join(script_dir, r'static', r'head_lgr.pkl')
 
 model_1 = joblib.load(body_model_path1)
 model_2 = joblib.load(body_model_path2)
@@ -58,29 +58,29 @@ def hybrid(predcent1,predcent2,predcent3,predcent4):
         msg_op = 3    
     return msg_op    
 
-def calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr):
+def calc_mean(decision, pred_score_nb, pred_score_knn, pred_score_rf, pred_score_lgr):
     if(decision == 1):
-        if((pred_score_nb[1]*100)>=40):
-            return ((pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
+        if((pred_score_nb[1]*100) >= 40):
+            return ((pred_score_knn[1] + pred_score_rf[1] + pred_score_lgr[1]) / 3)
         elif((pred_score_knn[1]*100)>=40):
-            return ((pred_score_nb[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
+            return ((pred_score_nb[1] + pred_score_rf[1] + pred_score_lgr[1]) / 3)
         elif((pred_score_rf[1]*100)>=40):
-            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_lgr[1])/3)
+            return ((pred_score_nb[1] + pred_score_knn[1] + pred_score_lgr[1]) / 3)
         elif((pred_score_lgr[1]*100)>=40):
-            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1])/3)        
+            return ((pred_score_nb[1] + pred_score_knn[1] + pred_score_rf[1]) / 3)        
         else:
-            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/4)
+            return ((pred_score_nb[1] + pred_score_knn[1] + pred_score_rf[1] + pred_score_lgr[1]) / 4)
     elif(decision == 2):
-        if((pred_score_nb[1]*100)<=60):
-            return ((pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
-        elif((pred_score_knn[1]*100)<=60):
-            return ((pred_score_nb[1]+pred_score_rf[1]+pred_score_lgr[1])/3)
-        elif((pred_score_rf[1]*100)<=60):
-            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_lgr[1])/3)
-        elif((pred_score_lgr[1]*100)<=60):
-            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1])/3)        
+        if((pred_score_nb[1]*100) <= 60):
+            return ((pred_score_knn[1] + pred_score_rf[1] + pred_score_lgr[1]) / 3)
+        elif((pred_score_knn[1]*100) <= 60):
+            return ((pred_score_nb[1] + pred_score_rf[1] + pred_score_lgr[1]) / 3)
+        elif((pred_score_rf[1]*100) <= 60):
+            return ((pred_score_nb[1] + pred_score_knn[1] + pred_score_lgr[1]) / 3)
+        elif((pred_score_lgr[1]*100) <= 60):
+            return ((pred_score_nb[1] + pred_score_knn[1] + pred_score_rf[1]) / 3)        
         else:
-            return ((pred_score_nb[1]+pred_score_knn[1]+pred_score_rf[1]+pred_score_lgr[1])/4)
+            return ((pred_score_nb[1] + pred_score_knn[1] + pred_score_rf[1] + pred_score_lgr[1]) / 4)
     else:
             return 0.5       
         
@@ -109,10 +109,10 @@ def body_scoring(article):
     pred_cent_rf = pred_score_rf[1]*100
     pred_cent_lgr = pred_score_lgr[1]*100
 
-    decision=hybrid(pred_cent_nb,pred_cent_knn,pred_cent_rf,pred_cent_lgr)
-    mean = calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr)
+    decision=hybrid(pred_cent_nb, pred_cent_knn, pred_cent_rf, pred_cent_lgr)
+    mean = calc_mean(decision, pred_score_nb, pred_score_knn, pred_score_rf, pred_score_lgr)
 
-    return body_result(decision,mean)
+    return body_result(decision, mean)
 
 def headline_result(msg_op,mean):
     if ((mean*100 >= 40) & ((mean*100 <= 60))):
@@ -134,13 +134,13 @@ def headline_scoring(headline):
     pred_score_rf = model_7.predict_proba([headline])[0]
     pred_score_lgr = model_8.predict_proba([headline])[0]  
 
-    pred_cent_nb = pred_score_nb[1]*100
-    pred_cent_knn = pred_score_knn[1]*100
-    pred_cent_rf = pred_score_rf[1]*100
-    pred_cent_lgr = pred_score_lgr[1]*100
+    pred_cent_nb = pred_score_nb[1] * 100
+    pred_cent_knn = pred_score_knn[1] * 100
+    pred_cent_rf = pred_score_rf[1] * 100
+    pred_cent_lgr = pred_score_lgr[1] * 100
 
-    decision=hybrid(pred_cent_nb,pred_cent_knn,pred_cent_rf,pred_cent_lgr)
-    mean = calc_mean(decision,pred_score_nb,pred_score_knn,pred_score_rf,pred_score_lgr)
+    decision=hybrid(pred_cent_nb, pred_cent_knn, pred_cent_rf, pred_cent_lgr)
+    mean = calc_mean(decision, pred_score_nb, pred_score_knn, pred_score_rf, pred_score_lgr)
 
     return headline_result(decision,mean)
 

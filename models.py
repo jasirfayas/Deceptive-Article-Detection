@@ -19,9 +19,6 @@ fake_ds.columns = ['article','titles']
 fake_ds_head = fake_ds.drop(['article'],axis=1)
 fake_ds_head['clickbait'] = 1
 
-# fake_ds_body = fake_ds.drop(['titles'],axis=1)
-# fake_ds_body['label'] = 1
-
 headlines_fake=pd.read_csv('dataset/clickbait_data', sep="\n", header=None, names=['titles'])
 headlines_real=pd.read_csv('dataset/non_clickbait_data', sep="\n", header=None, names=['titles'])
 
@@ -46,10 +43,6 @@ tt_all = pd.concat([train_ds,test_ds])
 tt_all = shuffle(tt_all, random_state=27).reset_index(drop=True)
 tt_all.columns = ['article', 'label']
 
-# body_ds2 = pd.concat([tt_all,fake_ds_body],sort=True)
-# body_ds2 = shuffle(body_ds2, random_state=27).reset_index(drop=True)
-
-# body_combined = pd.concat([body_ds,body_ds2],sort=True)
 body_combined = pd.concat([body_ds,tt_all],sort=True)
 body_combined = shuffle(body_combined, random_state=27).reset_index(drop=True)
 
