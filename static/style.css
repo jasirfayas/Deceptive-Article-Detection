@@ -41,10 +41,11 @@ body {
 }
 
 .nav{
-  font-size:15px;
   cursor: pointer;
-  font-weight: 600;
-  background-color: purple;
+  width:30px;
+  height:30px;
+  padding:15px 0px 0px 17px; 
+  background-color: white;
   border:solid black;
   border-radius: 3px;
 }
