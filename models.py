@@ -1,12 +1,10 @@
 import pandas as pd
 import numpy as np
 
-# import warnings filter
+# to ignore all future warnings
 from warnings import simplefilter
-# ignore all future warnings
 simplefilter(action='ignore', category=FutureWarning)
 
-from sklearn.utils import shuffle
 head_ds = pd.read_csv('dataset/clickBait_Data.csv')
 head_ds = head_ds.drop(['index','id'], axis = 1)
                      
@@ -25,6 +23,7 @@ headlines_real=pd.read_csv('dataset/non_clickbait_data', sep="\n", header=None, 
 headlines_fake['clickbait'] = 1
 headlines_real['clickbait'] = 0
 
+from sklearn.utils import shuffle
 head_ds2 = pd.concat([headlines_fake,headlines_real])
 head_ds2 = shuffle(head_ds2, random_state=27).reset_index(drop=True)
 
@@ -75,7 +74,7 @@ from sklearn.naive_bayes import MultinomialNB
 pipe_body_nb = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('mnb', MultinomialNB())])
-pipe_body_nb.fit(X, y)
+pipe_body_nb.fit(X_train, y_train)
 predicted1 = pipe_body_nb.predict(X_test)
 print (np.mean(predicted1 == y_test))
 from sklearn.metrics import classification_report, confusion_matrix
@@ -87,7 +86,7 @@ print("\n--> Body pipeline created.\n")
 pipe_head_nb = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('mnb', MultinomialNB())])
-pipe_head_nb.fit(X2, y2)
+pipe_head_nb.fit(X_train2, y_train2)
 predicted5 = pipe_head_nb.predict(X_test2)
 print (np.mean(predicted5 == y_test2))
 print (classification_report(y_test2, predicted5))
@@ -102,7 +101,7 @@ from sklearn.neighbors import KNeighborsClassifier
 pipe_body_knn = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('knn', KNeighborsClassifier())])
-pipe_body_knn.fit(X, y)
+pipe_body_knn.fit(X_train, y_train)
 predicted2 = pipe_body_knn.predict(X_test)
 print (np.mean(predicted2 == y_test))
 print (classification_report(y_test, predicted2))
@@ -112,7 +111,7 @@ print("\n--> Body pipeline created.\n")
 pipe_head_knn= Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('knn', KNeighborsClassifier())])
-pipe_head_knn.fit(X2, y2)
+pipe_head_knn.fit(X_train2, y_train2)
 predicted6 = pipe_head_knn.predict(X_test2)
 print (np.mean(predicted6 == y_test2))
 print (classification_report(y_test2, predicted6))
@@ -125,7 +124,7 @@ from sklearn.ensemble import RandomForestClassifier
 pipe_body_rf = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('rf', RandomForestClassifier())])
-pipe_body_rf.fit(X, y)
+pipe_body_rf.fit(X_train, y_train)
 predicted3 = pipe_body_rf.predict(X_test)
 print (np.mean(predicted3 == y_test))
 print (classification_report(y_test, predicted3))
@@ -135,7 +134,7 @@ print("\n--> Body pipeline created.\n")
 pipe_head_rf = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('rf', RandomForestClassifier())])
-pipe_head_rf.fit(X2, y2)
+pipe_head_rf.fit(X_train2, y_train2)
 predicted7 = pipe_head_rf.predict(X_test2)
 print (np.mean(predicted7 == y_test2))
 print (classification_report(y_test2, predicted7))
@@ -148,7 +147,7 @@ from sklearn.linear_model import  LogisticRegression
 pipe_body_lgr = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('lgr', LogisticRegression())])
-pipe_body_lgr.fit(X, y)
+pipe_body_lgr.fit(X_train, y_train)
 predicted4 = pipe_body_lgr.predict(X_test)
 print (np.mean(predicted4 == y_test))
 print (classification_report(y_test, predicted4))
@@ -158,7 +157,7 @@ print("\n--> Body pipeline created.\n")
 pipe_head_lgr = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('lgr', LogisticRegression())])
-pipe_head_lgr.fit(X2, y2)
+pipe_head_lgr.fit(X_train2, y_train2)
 predicted8 = pipe_head_lgr.predict(X_test2)
 print (np.mean(predicted8 == y_test2))
 print (classification_report(y_test2, predicted8))
