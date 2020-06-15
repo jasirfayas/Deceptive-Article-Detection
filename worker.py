@@ -24,7 +24,7 @@ model_7 = joblib.load(headline_model_path3)
 model_8 = joblib.load(headline_model_path4)
 
 classifier = { 1: 'Naive Bayes', 2: 'K Neareast Neighbor', 3: 'Random Forest', 4: 'Logistic Regression' }
-message = { 1: "3 or more models agreed on true/not-deceptive", 2: "3 or more models agreed on fake/deceptive", 3: "Models didn't agree on anything" } 
+message = { 1: "2 or more models agreed on true/not-deceptive", 2: "2 or more models agreed on fake/deceptive", 3: "Models didn't agree on anything" } 
 
 def hybrid(predcent1,predcent2,predcent3,predcent4):
     flag_true = 0
@@ -50,9 +50,9 @@ def hybrid(predcent1,predcent2,predcent3,predcent4):
     elif(predcent4 > 60):
         flag_false = flag_false + 1
 
-    if(flag_true >= 3):
+    if(flag_true >= 2):
         msg_op = 1
-    elif(flag_false >= 3):
+    elif(flag_false >= 2):
         msg_op = 2
     else:
         msg_op = 3    
