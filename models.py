@@ -143,7 +143,7 @@ print("\n--> Headline pipeline created.")
 
 #pipeline4 Logistic Regression
 print("\n\n||||||||--------LogisticRegression--------|||||||||\n")
-from sklearn.linear_model import  LogisticRegression
+from sklearn.linear_model import LogisticRegression
 pipe_body_lgr = Pipeline([('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
             ('lgr', LogisticRegression())])
